@@ -1,2 +1,5 @@
-theme: jekyll-theme-minimal
-title: KE4H Odyssey Emotion Graph 
+remote_theme: pages-themes/merlot@v0.2.0
+plugins:
+- jekyll-remote-theme
+title: "KE4H Project: The Odyssey Emotion Graph"
+description: "Knowledge Engineering for the Humanities"
