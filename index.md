@@ -59,7 +59,7 @@ WHERE {
 ```
 
 ## 4. LLM Prompting & Results
-We tested three prompting techniques across two LLMs to extract triples from the following text:
+I tested three prompting techniques across two LLMs to extract triples from the following text:
 "Odysseus and his men are trapped in a cave. Polyphemus, a cruel Cyclops, devours two sailors. Odysseus is horrified but keeps his cool, devises a plan with a stake."
 
 ### Technique 1: Zero-Shot
