@@ -1,4 +1,3 @@
-Markdown
 # Knowledge Engineering for the Humanities: The Odyssey Emotion Graph
 
 **Team Members:** [Zurab Kerimov]
