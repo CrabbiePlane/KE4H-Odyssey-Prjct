@@ -1,1 +1,12 @@
-.
+# Запрос CONSTRUCT для генерации новых знаний
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX ex: <http://example.org/odyssey/>
+
+CONSTRUCT {
+    # Создаем новый триплет: Герой доказал героизм
+    ?hero ex:provedHeroism "true" .
+}
+WHERE {
+    # Условие: ищем тех, кто столкнулся с испытанием
+    ?hero ex:facesTrial ?monster .
+}
