@@ -16,7 +16,20 @@ This project focuses on the combined use of knowledge graphs and Large Language 
 ## 2. Methodology and Tools
 The general methodology involves:
 1. **Knowledge Extraction:** Using LLMs (ChatGPT and Google Gemini) to extract emotional states from text snippets of the Odyssey.
-2. **Ontology Modeling:** Extending the standard vocabulary using RDF Schema (RDFS) to define new classes (e.g., `ex:Hero`, `ex:Monster`) and properties (e.g., `ex:facesTrial`).
+2. **Ontology Modeling:** Extending the standard vocabulary using RDF Schema (RDFS). I defined new classes and subset relationships, and established rules for our custom properties. Below is a snippet of our RDFS logic written in Turtle:
+
+```turtle
+# 1. Class Taxonomy
+ex:MythologicalFigure a rdfs:Class .
+ex:Hero rdfs:subClassOf ex:MythologicalFigure .
+ex:Monster rdfs:subClassOf ex:MythologicalFigure .
+
+# 2. Property Constraints (Domain & Range)
+ex:facesTrial a rdf:Property ;
+    rdfs:domain ex:Hero ;
+    rdfs:range ex:Monster .
+```
+
 3. **Querying:** Using SPARQL 1.1 to explore the graph and generate new knowledge.
 
 *Tools used:* GitHub Pages for publishing, Turtle for RDF serialization, and standard vocabularies (DBpedia/dbo).
@@ -64,17 +77,23 @@ I tested three prompting techniques across two LLMs to extract triples from the 
 
 ### Technique 1: Zero-Shot
 **Prompt**: Extract the emotions of the characters from the text above. Present the result strictly in RDF Turtle format using the prefix ex:. Subject = character, predicate = ex:feelsEmotion, object = emotion.
+
 **ChatGPT**: Generated invalid Turtle (missing prefixes, used non-standard ex:Odysseus).
+
 **Gemini**: Generated invalid Turtle (missing prefixes, capitalized emotions without proper syntax).
 
 ### Technique 2: Few-Shot
 **Prompt**: (Included specific RDF examples showing the use of dbr: and ex:feelsEmotion).
+
 **ChatGPT**: Corrected subjects to standard dbr:, but missed @prefix document declarations.
+
 **Gemini**: Successfully output complete, valid Turtle code with all necessary @prefix declarations.
 
 ### Technique 3: Chain-of-Thought
 **Prompt**: Analyze the text step-by-step. 1) Identify characters. 2) Analyze state. 3) Map emotion. 4) Generate RDF Turtle.
+
 **ChatGPT**: Substituted "Horror" for the more fundamental "Fear" based on reasoning.
+
 **Gemini**: Conducted a deep semantic analysis, identifying that "Cruelty" for Polyphemus is a disposition rather than a temporary emotional state, and successfully avoided hallucinations for the unnamed sailors.
 
 ## 5. Challenges & LLM Comparison
