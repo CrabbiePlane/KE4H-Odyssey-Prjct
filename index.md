@@ -1,6 +1,6 @@
 # Knowledge Engineering for the Humanities: The Odyssey Emotion Graph
 
-**Team Members:** [Zurab Kerimov]
+**Project by Zurab Kerimov** 
 
 ## Navigation
 * [Methodology & Gap Identification](#methodology)
