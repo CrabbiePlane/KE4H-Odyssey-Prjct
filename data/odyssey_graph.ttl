@@ -1,1 +1,55 @@
-.
+@prefix dbr: <http://dbpedia.org/resource/> 
+@prefix dbo: <http://dbpedia.org/ontology/> 
+@prefix ex: <http://example.org/odyssey/> 
+--------------------------------------------------
+# --- RDFS Vocabulary Definition ---
+# 1. Создаем классы и иерархию (Taxonomy)
+ex:MythologicalFigure a rdfs:Class .
+ex:Hero rdfs:subClassOf ex:MythologicalFigure .
+ex:Monster rdfs:subClassOf ex:MythologicalFigure .
+
+# 2. Создаем свой собственный предикат
+ex:facesTrial a rdf:Property ;
+    # Домен: только Герой может столкнуться с испытанием
+    rdfs:domain ex:Hero ;
+    # Диапазон: испытанием должен быть Монстр
+    rdfs:range ex:Monster .
+
+# --- Data Assertions ---
+# 3. Применяем словарь к нашим данным
+dbr:Odysseus a ex:Hero .
+dbr:Polyphemus a ex:Monster .
+
+# Теперь, благодаря правилам выше, машина логически понимает эту связь
+dbr:Odysseus ex:facesTrial dbr:Polyphemus .
+---------------------------------------------------
+
+dbr:Polyphemus dbo:parent dbr:Poseidon 
+dbr:Odysseus dbo:enemy dbr:Polyphemus 
+dbr:Homer dbo:author dbr:Odyssey
+---------------------------------------------------
+
+# rdf:type: указывает, что конкретный объект принадлежит классу
+# rdfs:Class: определяет сам набор объектов
+# rdfs:subClassOf: указывает, что один класс является подмножеством другого
+# Определяем классы
+ex:Deity a rdfs:Class 
+ex:GreekGod rdfs:subClassOf ex:Deity 
+ex:Monster a rdfs:Class 
+
+# Присваиваем сущностям типы (rdf:type часто записывается просто буквой "a")
+dbr:Poseidon a ex:GreekGod 
+dbr:Polyphemus a ex:Monster
+-----------------------------------------------------
+#rdfs:subClassOf
+ex:GreekGod rdfs:subClassOf ex:Deity
+dbr:Poseidon rdf:type ex:GreekGod --> dbr:Poseidon rdf:type ex:Deity
+
+#rdfs:domain
+ex:hasSuperpower rdfs:domain ex:MythicalCreature
+dbr:Polyphemus ex:hasSuperpower "Huge Strength" --> Polyphemus=MythicalCreature
+
+#rdfs:range
+ex:praysTo rdfs:range ex:Deity
+dbr:Odysseus ex:praysTo dbr:Athena --> Athena=Deity
+
