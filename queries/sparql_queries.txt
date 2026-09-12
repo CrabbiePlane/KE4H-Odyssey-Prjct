@@ -10,3 +10,22 @@ WHERE {
     # Условие: ищем тех, кто столкнулся с испытанием
     ?hero ex:facesTrial ?monster .
 }
+
+# 1. DISTINCT: убирает возможные дубликаты из результатов
+SELECT DISTINCT ?character ?enemy
+WHERE {
+    # 2. UNION: ищет в графе либо Героев, либо Монстров (срабатывает логическое ИЛИ)
+    { ?character a ex:Hero . }
+    UNION
+    { ?character a ex:Monster . }
+    
+    # 3. OPTIONAL: ищет врагов персонажа. Если враг в графе не указан, запрос не сломается, а просто оставит это поле пустым
+    OPTIONAL { ?character dbo:enemy ?enemy . }
+    
+    # 4. FILTER и 5. REGEX: оставляет только те результаты, где в имени есть буква "o" ("i" означает, что регистр не важен)
+    FILTER(REGEX(str(?character), "o", "i"))
+}
+# 6. ORDER BY: сортирует полученный список персонажей по алфавиту
+ORDER BY ?character
+# 7. LIMIT: показывает максимум 10 ответов, чтобы не перегружать сервер
+LIMIT 10
