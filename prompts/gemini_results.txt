@@ -1,0 +1,58 @@
+The text for AI research:
+"Odysseus and his men are trapped in a cave. Polyphemus, a cruel Cyclops, devours two sailors. Odysseus is horrified but keeps his cool, devises a plan with a stake."
+
+The Zero-Shot prompt:
+"Extract the characters' emotions from the text above. Represent the result strictly as RDF Turtle triples, using the ex: prefix. Subject is character, predicate is ex:feelsEmotion, object is emotion."
+
+Result:
+ex:Odysseus ex:feelsEmotion ex:Horror .
+ex:Odysseus ex:feelsEmotion ex:Composure .
+ex:Polyphemus ex:feelsEmotion ex:Cruelty .
+
+
+The Few-Shot Prompt:
+Extract emotions from text in RDF Turtle format. 
+Example 1: Text: 'Penelope cries at the window, waiting for her husband.' -> Triplet: dbr:Penelope ex:feelsEmotion ex:Sadness . 
+Example 2: Text: 'Telemachus angrily yells at the suitors.' -> Triplet: dbr:Telemachus ex:feelsEmotion ex:Anger . 
+Now do the same for my text about Odysseus and Polyphemus.
+
+The Result:
+@prefix ex: <http://example.org/> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+
+dbr:Odysseus ex:feelsEmotion ex:Horror .
+dbr:Odysseus ex:feelsEmotion ex:Composure .
+dbr:Polyphemus ex:feelsEmotion ex:Cruelty .
+
+
+The Chain-of-Thought Prompt:
+Analyze the text. Think step-by-step. 
+Step 1: Write out each character. 
+Step 2: Analyze their state in the text. 
+Step 3: Name the basic emotion. 
+Step 4: Only then generate the final response in RDF Turtle triplet format.
+
+The Result:
+Step 1: Character Identification
+ * Odysseus
+ * Polyphemus
+ * Odysseus's men — mentioned as victims, but no explicit emotion is directly stated for them in the text.
+Step 2: State Analysis in Text
+ * Odysseus: 
+    Text states: Odysseus is horrified. 
+    Text states: but maintains composure / calmness.
+ * Polyphemus: 
+    Text states: cruel cyclops, devoured two sailors. Cruelty describes his disposition/state in this act, though in strict psychological terms, the primary explicit emotion linked directly to state is Cruelty (or underlying Malice/Aggression).
+Step 3: Basic Emotion Mapping
+ * Odysseus: 
+    Horror
+    Cool
+ * Polyphemus:
+    Cruelty
+
+@prefix ex: <http://example.org/> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+
+dbr:Odysseus ex:feelsEmotion ex:Horror .
+dbr:Odysseus ex:feelsEmotion ex:Composure .
+dbr:Polyphemus ex:feelsEmotion ex:Cruelty .
