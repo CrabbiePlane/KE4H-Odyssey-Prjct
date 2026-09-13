@@ -25,9 +25,9 @@ ex:Hero rdfs:subClassOf ex:MythologicalFigure .
 ex:Monster rdfs:subClassOf ex:MythologicalFigure .
 
 # 2. Property Constraints (Domain & Range)
-ex:facesTrial a rdf:Property ;
-    rdfs:domain ex:Hero ;
-    rdfs:range ex:Monster .
+ex:facesTrial a rdf:Property .
+rdfs:domain ex:Hero .
+rdfs:range ex:Monster .
 ```
 
 3. **Querying:** Using SPARQL 1.1 to explore the graph and generate new knowledge.
