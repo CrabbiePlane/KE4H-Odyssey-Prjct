@@ -57,6 +57,11 @@ ORDER BY ?character
 LIMIT 10
 ```
 
+![Result of Query 1](query1.png)
+
+Queries were executed using [SPARQL Playground](https://atomgraph.github.io/SPARQL-Playground/)
+
+
 ### Query 2: Generating New Knowledge (CONSTRUCT)
 This query infers new triples based on existing RDFS logic.
 
